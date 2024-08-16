@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MenuApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Search</title>
+    <!-- Load AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Link to your AngularJS app file -->
+    <script src="app.js"></script>
+</head>
+<body ng-controller="MenuController as menuCtrl">
+
+    <!-- Textbox and Button for Search -->
+    <div>
+        <input type="text" ng-model="menuCtrl.searchTerm" placeholder="Enter search term">
+        <button ng-click="menuCtrl.narrowDown()">Narrow It Down For Me!</button>
+    </div>
+
+    <!-- Display Found Items -->
+    <div ng-if="menuCtrl.found.length > 0">
+        <ul>
+            <li ng-repeat="item in menuCtrl.found track by $index">
+                <span>{{ item.name }}, {{ item.short_name }}, {{ item.description }}</span>
+                <button ng-click="menuCtrl.removeItem($index)">Don't want this one!</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Display Message if Nothing is Found -->
+    <div ng-if="menuCtrl.message">
+        <p>{{ menuCtrl.message }}</p>
+    </div>
+
+</body>
+</html>
